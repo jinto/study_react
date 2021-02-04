@@ -1,5 +1,4 @@
 import React from 'react';
-import { unmountComponentAtNode } from 'react-dom';
 
 class Detail extends React.Component {
     componentDidMount() {
