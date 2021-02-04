@@ -1,21 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import PropTypes from 'prop-types';
-
-function Movie({id, year, title}) {
-  return (
-    <div>
-      <h1>{title}</h1>
-    </div>
-  )
-}
-Movie.propTypes = {
-  id: PropTypes.number.isRequired,
-  year: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  summary: PropTypes.string.isRequired,
-  poster: PropTypes.string.isRequired,
-}
+import Movie from './Movie';
 
 class App extends React.Component {
   state = {
@@ -24,7 +9,7 @@ class App extends React.Component {
   }
 
   getMovies = async () => {
-    const {data:{data:{movies}}} = await axios.get('https://yts-proxy.now.sh/list_movies.json');
+    const {data:{data:{movies}}} = await axios.get('https://yts-proxy.now.sh/list_movies.json?sort_by=rating');
     this.setState({movies, isLoading: false})
     console.log(this.state.movies)
   }
@@ -34,18 +19,29 @@ class App extends React.Component {
   render() {
     const { isLoading, movies } = this.state
     return (
-      <div>{isLoading? 'Loading...': 'Ready'}
+      <section class="container">
       {
-        movies.map(movie=> 
-          <Movie id={movie.id} 
-            year={movie.year} 
-            title={movie.title}
-            summary={movie.summary}
-            poster={movie.poster}
-          />
+        isLoading ? (
+          <div class='loader'>
+            <span class="loader__text">Loading...</span>
+          </div>
+        ) : (
+          <div class='movies'>
+          {
+            movies.map(movie=> 
+              <Movie key={movie.id} 
+                id={movie.id} 
+                year={movie.year} 
+                title={movie.title}
+                summary={movie.summary}
+                poster={movie.medium_cover_image}
+              />
+            )
+          }
+          </div>
         )
       }
-      </div>
+      </section>
     )
   }
 }
