@@ -5,7 +5,7 @@ function Movie(props) {
   return (
     <div>
       <h3>감자감자감자 진짜? { fav } {papa}</h3>
-      <img width="100px" src={pic}></img>
+      <img alt="fav" width="100px" src={pic}></img>
     </div>
   );
 }
