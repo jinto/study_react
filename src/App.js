@@ -1,11 +1,10 @@
 import React from 'react';
-import axios from 'axios';
-import Movie from './components/Movie';
-import './App.css'
 import { HashRouter, Route } from 'react-router-dom'
+
 import Home from './routes/Home';
 import About from './routes/About';
 import Navigation from './components/Navigation'
+import './App.css'
 
 function App() {
   return (
